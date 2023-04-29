@@ -1,0 +1,16 @@
+<%= stylesheet_link_tag 'categories' %>
+
+<body class="hrBar" style="  background-image: url(<%= asset_path 'Frame4.png'%>);
+  background-size: cover;">
+  <div class="container pt-5">
+    <div class="row">
+    <% Category.children_of(@category).each do |sub_category| %>
+      
+      <div class="col-3 pt-5">
+        <p><%= link_to sub_category.title, show_tasks_category_path(sub_category), {:style=>'color:#FFFFFF; font-size: 150%;  text-overflow: ellipsis; text-decoration:none;
+          font-weight:bold; display: block;   width: 310px; height: 100px;', :class => "card-body btn btn-success btn-circle"} %></p>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</body>

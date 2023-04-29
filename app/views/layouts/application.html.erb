@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>StudyHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+ <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application' %>
+
+  </head>
+
+<body>
+<div id="wrapper">
+<div id="header">
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/"><strong><span style="color: #000000;">Study</span><span style="color: #018c4b;">Hub</span></strong></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                  <li class="nav-item active">
+                    <a class="nav-link" aria-current="page" href="/about"><strong>Про нас</strong></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" aria-current="page" href="/faq"><strong>FAQ</strong></a>
+                  </li>
+                  <% if current_user %>
+                                  <% if current_user.role == 'customer' %>
+                                  
+                    <strong><%= link_to 'Створити завдання', new_task_path, class: 'nav-link active'%></strong>
+                
+                    <% end %>
+                    <% end %>
+                </ul>
+              </div>
+                        <% if current_user %>
+                        <%= link_to current_user.email, profile_user_path(current_user), class: 'btn btn-success btn-sm'%>&emsp;
+                    <%= link_to 'Вихід', destroy_user_session_path, method: :delete, class: 'btn btn-outline-success text-end btn-sm'%>
+                  <% else %>
+                  <div style="right: 1000px;">
+                   <%= link_to 'Вхід',new_user_session_path,class: 'btn btn-success btn-sm'%>
+                  <% end %>
+            </div>
+          </nav>
+    </header>
+</div>
+<div id="content">
+
+
+
+    <!--<div class="container pt-5">
+      <div class="row pt-5">
+      
+      <div class="col-3 pt-3">
+  <div class="card bg-light h-1">
+    <div class="card-body text-center">
+      
+    </div>
+  </div>
+  </div>
+  
+</div>
+</div>-->
+
+
+    <%= yield %>
+
+
+
+
+</div>
+<div id="footer">
+      <div class="footer">
+
+    <footer class="bg-dark  text-white">
+      <!-- Grid container --> 
+
+      <div class="container p-4 pb-0">
+        <!-- Section: Social media -->
+         
+
+        <section class="mb-2">
+          <!-- Facebook -->
+          <div class="row">
+            <div class="col-4">
+            <a class="navbar-brand" href="/"><strong><span style="color: #FFFFFF;">Study</span><span style="color: #018c4b;">Hub</span></strong></a></br>
+            <%= link_to "Зворотній зв'язок", new_contact_path, class: "btn btn-outline-light btn-floating m-1", style: "text-align: left;"%>  
+            </div>
+
+            <div class="col-4 text-center p-4">
+            <a class="btn btn-outline-light  btn-floating m-1" href="https://www.facebook.com/" role="button"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://google.com/" role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://instagram.com/" role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/" role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+
+            <!-- Github -->
+            <a class="btn btn-outline-light btn-floating m-1" href="https://www.github.com/" role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </div>
+          <div class="col-4 p-3" style="text-align: right;">
+            <i class="fab fa-cc-paypal" style="font-size: 70px;"></i>&emsp;
+           <i class="fab fa-cc-visa" style="font-size: 70px;"></i>
+
+
+          </div>
+
+          </div>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center">
+        StudyHub © 2021
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+</div>
+</div>
+</body>
+
+
+</html>

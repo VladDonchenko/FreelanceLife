@@ -1,0 +1,35 @@
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<h2 style="text-align: center;">Пропозиції</h2>
+<div class="comment">
+  <% @task.comments.each do |comment| %>
+  <div class="col-lg-10">
+    <div class="card shadow mb-5">
+      <div class="card-header">
+      	<h6><%= comment.user.email %></h6>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= comment.body %></p>
+        <div style="text-align: center;">
+           <% if current_user.role == "customer" and current_user.id == @task.author_id %>
+           <% if @free_order.present? %>
+           <%= button_to 'Прийняти', appoint_order_path(task_id: @task.id, implementer_id: comment.user_id), method: :post, class: "btn btn-success" %>
+           <% else %>
+           <i class="fa fa-times" aria-hidden="true">Не доступно</i>
+           <%end %>
+           <% end %>
+	        	<% if current_user.email == comment.user.email %>
+	            	<%= link_to (fa_icon "trash-o"), comment_path(comment), method: :delete, class: "btn btn-outline-dark",
+	                              data: {confirm: 'Confirm delete your comment?'} %>
+	             <% end %>
+         </div>
+      </div>
+
+        <div class="row">
+
+        </div>
+    </div>
+  </div>
+<% end %>
+
+  </div>

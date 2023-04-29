@@ -1,0 +1,24 @@
+ <%= stylesheet_link_tag 'home' %>
+ <div class="pt-5">
+</div>
+   <%= image_tag("Frame3.png", :class =>'image')%>
+
+
+   <h1 style="color: black;">Обери свою категорію</h1>
+
+  <h2>
+    <div class="container pt-5">
+    <div class="row">
+    <% Category.roots.each do |category| %>
+
+  <div class="col-6 pt-5 ">
+    
+      
+        <p><%= link_to category.title, category_path(category), {:style=>'color:#FFFFFF; font-size: 40px; text-decoration:none;
+          font-weight:bold; display: block;text-align: center;', :class => "btn btn-success"} %></p>
+      
+    
+  </div>
+  <% end %>
+</div>
+</h2>
