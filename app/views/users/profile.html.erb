@@ -59,7 +59,9 @@
 
       <td><%= order.status_ua %></td>
       <% if order.task.file.present? %>
-        <td><%= link_to 'Завантажити' , order.task.file, download: '' %>
+        <td><% order.task.file.each do |file|%>
+          <%= link_to 'Завантажити' , rails_blob_path(file, only_path: true),download: '' %>
+        <%end%></td>
           <% else %>
           <td><p><%= link_to 'Show task', task_path(order.task) %></p></td>
       <% end %>

@@ -31,6 +31,7 @@ class TasksController < InheritedResources::Base
     @task = Task.find(params[:id])
     @comment = @task.comments
     @review = @task.reviews
+    @try_task = Task.where(category_id: 0)
     @order_task = Order.where(task_id: @task.id)
     @free_order = Order.where(task_id: @task.id, status: 0)
     @completed_order = Order.where(task_id: @task, client_id: current_user, status: 'done')
@@ -55,7 +56,7 @@ class TasksController < InheritedResources::Base
   end
 
   def task_params
-    params.require(:task).permit(:title, :category_id, :category, :description, :price, :deadline, :files,
+    params.require(:task).permit(:title, :category_id, :category, :description, :price, :deadline, file: [],
                                  additional_file: [])
   end
 end
