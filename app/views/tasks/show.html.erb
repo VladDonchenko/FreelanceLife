@@ -23,6 +23,11 @@
 		  <strong>Виконати до:</strong>
 		  <%= @task.deadline %>
 		</p>
+
+		<% if @try_task and current_user.role == 'contractor'%>
+		<%= link_to 'Виконати тестове завдання' %>
+		<% end %>
+
 		<% if @task.additional_file.present? %>
 		<p>
 		  <strong>Вкладені файли:</strong>
@@ -33,7 +38,9 @@
 		<% end %>
 		 <% if @unpermitted and current_user.role == 'contractor'%>
 
+		<% if !@try_task and current_user.role == 'contractor'%>
 		<div><%= link_to 'Відправити пропозицію', new_comment_path(user_id: current_user, task_id: @task), method: :get, class: 'btn btn-success' %></div>
+		<% end %>
 			
 		<% end %>
 		<% if @allow_upload %>

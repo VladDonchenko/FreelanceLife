@@ -31,7 +31,10 @@ class TasksController < InheritedResources::Base
     @task = Task.find(params[:id])
     @comment = @task.comments
     @review = @task.reviews
-    @try_task = Task.where(category_id: 0)
+    @test_category = Category.roots.ids[0]
+    
+    @try_task = Category.children_of(Category.roots.ids[0]).include?(@task.category)
+  
     @order_task = Order.where(task_id: @task.id)
     @free_order = Order.where(task_id: @task.id, status: 0)
     @completed_order = Order.where(task_id: @task, client_id: current_user, status: 'done')
