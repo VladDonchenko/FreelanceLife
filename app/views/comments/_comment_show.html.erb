@@ -6,7 +6,7 @@
   <div class="col-lg-10">
     <div class="card shadow mb-5">
       <div class="card-header">
-      	<h6><%= comment.user.email %></h6>
+      	<h6><%=link_to comment.user.email, profile_user_path(comment.user_id)  %> <%=comment.user.rating%> </h6>
       </div>
       <div class="card-body">
         <p class="card-text"><%= comment.body %></p>
